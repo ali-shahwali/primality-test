@@ -4,7 +4,7 @@ const std = @import("std");
 const utils = @import("utils.zig");
 const testing = std.testing;
 
-pub fn millerRabinTest(comptime T: type, n: T, rounds: usize, rand: std.rand.Random) bool {
+pub fn millerRabinTest(comptime T: type, n: T, rounds: usize, rand: std.Random) bool {
     utils.assertIntegerType(T);
 
     if (n == 2) return true;
@@ -58,7 +58,7 @@ fn powermod(comptime T: type, b: T, e: T, n: T) T {
 }
 
 test "test_first_10000_primes_with_miller_rabin" {
-    var prng = std.rand.DefaultPrng.init(42);
+    var prng = std.Random.DefaultPrng.init(42);
     const rand = prng.random();
 
     const primes = try utils.load10000Primes(u64);

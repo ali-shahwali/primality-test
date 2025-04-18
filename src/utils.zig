@@ -3,7 +3,7 @@ const testing = std.testing;
 
 pub fn load10000Primes(comptime T: type) ![10000]T {
     const primes_txt = @embedFile("static/primes.txt");
-    var iter = std.mem.split(u8, primes_txt, ",");
+    var iter = std.mem.splitScalar(u8, primes_txt, ',');
 
     var primes: [10000]T = undefined;
     var i: usize = 0;
@@ -18,7 +18,7 @@ pub fn load10000Primes(comptime T: type) ![10000]T {
 pub fn assertIntegerType(comptime T: type) void {
     const ty_info = @typeInfo(T);
     switch (ty_info) {
-        .Int, .ComptimeInt => {},
+        .int, .comptime_int => {},
         else => @compileError("invalid type: must be an integer"),
     }
 }
